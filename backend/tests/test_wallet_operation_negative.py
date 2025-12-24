@@ -180,3 +180,42 @@ async def test_wallet_operation_without_body(wallet_manager, wallet_id):
         response.status_code == 422
     ), f"Неожиданный статус ответа: {response.status_code}, тело ответа: {response.text}"
     assert first["loc"][0] == "body"
+
+async def test_wallet_operation_amount_exceed_bigint(wallet_manager, wallet_id):
+    """Негативная проверка: значение больше BIGINT должно возвращать 422"""
+
+    exceeding_amount = 2**63  # Значение больше максимального для BIGINT
+    payload = {"operation_type": "DEPOSIT", "amount": exceeding_amount}
+
+    response = await wallet_manager.post_wallet_operation(wallet_id, json=payload)
+    response_json = response.json()
+
+    assert response.status_code == 422, f"Неожиданный статус ответа: {response.status_code}, тело ответа: {response.text}"
+    
+    first = _first_error(response_json)
+    
+    assert first['loc'] == ['body', 'amount']
+    assert first['msg'] == 'Input should be less than or equal to 9223372036854775807'
+    assert first['input'] == exceeding_amount
+    assert first['ctx']['le'] == 9223372036854775807
+
+
+async def test_wallet_operation_amount_bigint_plus_one(wallet_manager, wallet_id):
+    """Негативная проверка: максимальное значение BIGINT + 1 должно возвращать 422"""
+
+    max_bigint = 2**63 - 1  # Максимальное значение для BIGINT
+    exceeding_amount = max_bigint + 1
+
+    payload = {"operation_type": "DEPOSIT", "amount": exceeding_amount}
+
+    response = await wallet_manager.post_wallet_operation(wallet_id, json=payload)
+    response_json = response.json()
+
+    assert response.status_code == 422, f"Неожиданный статус ответа: {response.status_code}, тело ответа: {response.text}"
+
+    first = _first_error(response_json)
+
+    assert first['loc'] == ['body', 'amount']
+    assert first['msg'] == 'Input should be less than or equal to 9223372036854775807'
+    assert first['input'] == exceeding_amount
+    assert first['ctx']['le'] == 9223372036854775807

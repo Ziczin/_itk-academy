@@ -70,3 +70,15 @@ async def test_wallet_operation_withdraw_success(wallet_manager, wallet_id):
         operation_type="WITHDRAW",
         amount=1.0,
     )
+
+async def test_wallet_operation_amount_bigint(wallet_manager, wallet_id):
+    """Позитивная проверка: Проверка корректной работы с BIGINT значением"""
+
+    big_int_amount = 2**63 - 1  # Максимальное значение для BIGINT
+    payload = {"operation_type": "DEPOSIT", "amount": big_int_amount}
+
+    response = await wallet_manager.post_wallet_operation(wallet_id, json=payload)
+    response_json = response.json()
+
+    assert response.status_code == 200, f"Неожиданный статус ответа: {response.status_code}, тело ответа: {response.text}"
+    assert response_json['amount'] == big_int_amount
