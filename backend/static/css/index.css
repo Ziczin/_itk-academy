@@ -1,0 +1,255 @@
+:root {
+  font-size: 16px;
+  
+  --bg-primary: #f5f7fa;
+  --bg-white: #ffffff;
+  --bg-card: #f8f9fa;
+  --bg-sidebar: #eef2f7;
+  
+  --text-primary: #2c3e50;
+  --text-secondary: #5d6d7e;
+  --text-light: #7b8a8b;
+  
+  --border-light: #e0e0e0;
+  --border-sidebar: #d5dbdb;
+  
+  --btn-primary: #3498db;
+  --btn-success: #27ae60;
+  --btn-danger: #e74c3c;
+  --btn-warning: #f39c12;
+  --btn-info: #17a2b8;
+  
+  --code-success-bg: #d5edda;
+  --code-success-color: #155724;
+  --code-redirect-bg: #fff3cd;
+  --code-redirect-color: #856404;
+  --code-client-error-bg: #f8d7da;
+  --code-client-error-color: #721c24;
+  --code-server-error-bg: #e2d9f3;
+  --code-server-error-color: #3d2c5a;
+  
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --radius: 12px;
+  --gap: 0.5rem;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-primary);
+  font-size: 1rem;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.content-panel {
+  flex: 3;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.accounts-panel {
+  flex: 1;
+  background: var(--bg-sidebar);
+  border-left: 1px solid var(--border-sidebar);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  background: var(--bg-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.accounts-container {
+  background: var(--bg-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: var(--gap);
+}
+
+.accounts-header {
+  display: flex;
+  justify-content: center;
+}
+
+.accounts-btn {
+  background: var(--btn-info);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+}
+
+.accounts-list {
+  flex: 1;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.account-item {
+  padding: 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Courier New', monospace;
+}
+
+.account-item:hover {
+  background: var(--bg-primary);
+  border-color: var(--btn-primary);
+}
+
+h1 {
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.input-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-row input {
+  flex: 1;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  padding: 0.75rem;
+}
+
+.operation-type-row {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.operation-select {
+  width: 300px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius);
+  background-color: var(--input-bg, var(--bg-white));
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.operation-select:focus {
+  outline: none;
+  border-color: var(--btn-primary);
+}
+
+.button-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.main-btn {
+  flex: 1;
+  background: var(--btn-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.75rem;
+}
+
+.account-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.account-btn {
+  flex: 1;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.75rem;
+}
+
+#createBtn {
+  background: var(--btn-warning);
+  color: white;
+}
+
+.url-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.url-input {
+  flex: 1;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  font-size: 1rem;
+  padding: 0.75rem;
+}
+
+.code-box {
+  border-radius: var(--radius);
+  font-weight: 500;
+  min-width: 120px;
+  text-align: center;
+  background: var(--code-success-bg);
+  color: var(--code-success-color);
+  padding: 0.75rem;
+}
+
+.output-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  flex: 1;
+}
+
+.output-title {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.output-box {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  white-space: pre-wrap;
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  min-height: 150px;
+}

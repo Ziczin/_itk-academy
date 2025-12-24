@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошелёк</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+  <div class="main-container">
+    <div class="content-panel">
+      <div class="container">
+        <h1>Управление балансом</h1>
+        
+        <div class="input-row">
+          <input type="text" id="wallet" placeholder="UUID кошелька">
+          <input type="number" id="amount" placeholder="Сумма" value="0">
+        </div>
+
+        <div class="operation-type-row">
+          <select id="operationType" class="operation-select">
+            <option value="DEPOSIT">Пополнение (DEPOSIT)</option>
+            <option value="WITHDRAW">Списание (WITHDRAW)</option>
+          </select>
+        </div>
+        
+        <div class="button-row">
+          <button class="main-btn" id="getBalanceBtn">Получить баланс</button>
+          <button class="main-btn" id="operationBtn">Выполнить операцию</button>
+        </div>
+        
+        <div class="account-buttons">
+          <button class="account-btn" id="createBtn">Создать кошелёк</button>
+        </div>
+        
+        <div class="url-section">
+          <input type="text" id="url" class="url-input" value="/" placeholder="URL запроса">
+          <div id="codeResponse" class="code-box">Код: 2xx</div>
+        </div>
+        
+        <div class="output-section">
+          <div>
+            <div class="output-title">Отправлен запрос</div>
+            <div id="requestOutput" class="output-box"></div>
+          </div>
+          
+          <div>
+            <div class="output-title">Получен ответ</div>
+            <div id="responseOutput" class="output-box"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="accounts-panel">
+      <div class="accounts-container">
+        <div class="accounts-header">
+          <button class="accounts-btn" id="getListBtn">Обновить список</button>
+        </div>
+        <div class="accounts-list" id="accountsList">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/static/js/index.js"></script>
+</body>
+</html>
