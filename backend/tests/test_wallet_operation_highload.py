@@ -50,17 +50,14 @@ async def concurrent_mixed_operations(
     """Выполняет смешанные операции с возможностью отслеживания прогресса"""
     tasks = []
     for i in range(batch_size):
-        # Задача на списание
         withdraw_task = wallet_manager.post_wallet_operation(
             wallet_id, json={"operation_type": "WITHDRAW", "amount": 1.0}
         )
 
-        # Задача на пополнение
         deposit_task = wallet_manager.post_wallet_operation(
             wallet_id, json={"operation_type": "DEPOSIT", "amount": 1.0}
         )
 
-        # Оборачиваем задачи для отслеживания прогресса
         if progress_callback:
 
             async def tracked_withdraw_task(original_task):
@@ -156,7 +153,7 @@ async def test_concurrent_deposits_batches(
 
     print(
         f"✓ Test {test_name} завершен. Успешных пополнений: {successful_deposits}, "
-        f"Баланс: {actual_balance:.1f}"
+        f"Баланс: {actual_balance}"
     )
 
     assert actual_balance == expected_balance
@@ -193,7 +190,6 @@ async def test_concurrent_withdrawals_batches(
     all_results = []
     total_requests = batch_count * requests_per_batch
 
-    # Прогресс-бар для этого теста
     with tqdm(
         total=total_requests,
         desc=f"Test: {test_name}",
@@ -234,7 +230,7 @@ async def test_concurrent_withdrawals_batches(
 
     print(
         f"✓ Test {test_name} завершен. Успешных списаний: {successful_withdrawals}, "
-        f"Неудачных: {failed_withdrawals}, Баланс: {actual_balance:.1f}"
+        f"Неудачных: {failed_withdrawals}, Баланс: {actual_balance}"
     )
 
     assert actual_balance == expected_balance
@@ -315,7 +311,7 @@ async def test_concurrent_mixed_operations_batches(
     print(
         f"✓ {test_name} Успешные списания: {successful_withdrawals}, "
         + f"Успешные пополнения: {successful_deposits}, "
-        + f"Баланс: {actual_balance:.1f}"
+        + f"Баланс: {actual_balance}"
     )
 
     assert actual_balance == expected_balance

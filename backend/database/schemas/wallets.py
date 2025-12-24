@@ -13,14 +13,14 @@ class WalletOperation(BaseModel):
     """Операция изменения баланса"""
 
     operation_type: OperationType
-    amount: float = Field(..., gt=0, le=9_223_372_036_854_775_807)
+    amount: int = Field(..., gt=0, le=9_223_372_036_854_775_807)
 
 
 class WalletBalanceResponse(BaseModel):
     """Ответ с балансом"""
 
     wallet_id: UUID
-    balance: float
+    balance: int
 
 
 class OperationResponse(BaseModel):
@@ -28,6 +28,6 @@ class OperationResponse(BaseModel):
 
     wallet_id: UUID
     operation_type: OperationType
-    amount: float
-    new_balance: float
+    amount: int
+    new_balance: int
     status: str = "success"

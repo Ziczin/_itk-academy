@@ -147,11 +147,11 @@ async def test_wallet_operation_amount_empty_string(wallet_manager, wallet_id):
     assert (
         response.status_code == 422
     ), f"Неожиданный статус ответа: {response.status_code}, тело ответа: {response.text}"
-    assert first["type"] == "float_parsing"
+    assert first["type"] == "int_parsing"
     assert first["loc"] == ["body", "amount"]
     assert (
         first["msg"]
-        == "Input should be a valid number, unable to parse string as a number"
+        == "Input should be a valid integer, unable to parse string as an integer"
     )
     assert first["input"] == ""
 

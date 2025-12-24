@@ -24,7 +24,7 @@ async def get_wallet(db: AsyncSession, wallet_uuid: UUID) -> Wallet:
 
 
 async def update_wallet_balance(
-    db: AsyncSession, wallet_uuid: UUID, operation_type: str, amount: float
+    db: AsyncSession, wallet_uuid: UUID, operation_type: str, amount: int
 ) -> Wallet:
     async with acquire_lock(db, Wallet, str(wallet_uuid), "uuid") as wallet:
         if operation_type == "WITHDRAW":

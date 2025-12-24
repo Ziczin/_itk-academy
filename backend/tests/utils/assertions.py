@@ -8,7 +8,7 @@ def assert_wallet(wallet: dict) -> None:
     assert isinstance(wallet, dict)
     assert isinstance(wallet_id, str)
     uuid.UUID(wallet_id)
-    assert isinstance(balance, (int, float))
+    assert isinstance(balance, (int, int))
 
 
 def assert_operation_success(
@@ -16,15 +16,15 @@ def assert_operation_success(
     *,
     wallet_id: str,
     operation_type: str,
-    amount: float,
+    amount: int,
 ) -> None:
     assert isinstance(response_json, dict)
     assert response_json.get("wallet_id") == wallet_id
     assert response_json.get("operation_type") == operation_type
-    assert isinstance(response_json.get("amount"), (int, float))
-    assert float(response_json.get("amount")) == float(amount)
+    assert isinstance(response_json.get("amount"), (int, int))
+    assert int(response_json.get("amount")) == int(amount)
     assert response_json.get("status") == "success"
-    assert isinstance(response_json.get("new_balance"), (int, float))
+    assert isinstance(response_json.get("new_balance"), (int, int))
 
 
 def assert_detail_is_insufficient_funds(response_json: dict) -> None:
